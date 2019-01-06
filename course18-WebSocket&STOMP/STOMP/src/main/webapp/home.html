@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+    <button onclick="closeWS()">STOP</button>
+    <br/>
+    <h2 id="output"></h2>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/sockjs.min.js"></script>
+<script src="/js/stomp.min.js"></script>
+<script>
+    let url = 'stomp/greet';
+    let socket = new SockJS(url);
+    let stomp = Stomp.over(socket);
+
+    stomp.connect('guest', 'guest', function (frame) {
+        console.log('*****  Connected  *****');
+        stomp.subscribe("/topic/greet", handleReply);
+        greet();
+    });
+
+    function handleOneTime(message) {
+        console.log('Received: ', message);
+    }
+
+    function handleReply(message) {
+        console.log('Received: ', JSON.stringify(message));
+        $('#output').append("收到: " +
+            JSON.parse(message.body).message + "<br/>");
+        if (JSON.parse(message.body).message === '干啥啊？') {
+            setTimeout(greet, 2000);
+        }
+    }
+
+    function handleErrors(message) {
+        console.log('RECEIVED ERROR: ', JSON.stringify(message));
+        $('#output').append("GOT AN ERROR!!!: " +
+            JSON.parse(message.body).message + "<br/>")
+    }
+
+    function greet() {
+        let payload = JSON.stringify({'message': '哈喽啊！'});
+        console.log('Sending Greeting!');
+        stomp.send("/app/greet", {}, payload);
+        $('#output').append("发送: 哈喽啊！<br/>")
+    }
+
+    function closeWS() {
+        socket.close();
+    }
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+    <button onclick="closeWS()">STOP</button>
+    <br/>
+    <h2 id="output"></h2>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/sockjs.min.js"></script>
+<script>
+    // 原生WebSocket
+    // let url = 'ws://' + window.location.host + '/ws/greet';
+    // let socket = new WebSocket(url); // 打开 WebSocket
+
+    // 使用SockJS
+    let url = 'ws/greet';
+    let socket = new SockJS(url);
+
+    // 处理连接开启事件
+    socket.onopen = function () {
+        console.log('WS 连接打开');
+        greet();
+    };
+    // 处理消息
+    socket.onmessage = function (msg) {
+        console.log('收到信息：' + msg.data);
+        $('#output').append('Received "' + msg.data + '"<br/>');
+        setTimeout(greet, 2000)
+    };
+    // 处理连接关闭事件
+    socket.onclose = function () {
+        console.log('WS 连接关闭');
+    };
+
+    function greet() {
+        console.log('哈喽啊！');
+        $('#output').append('Sending "哈喽啊!"<br/>');
+        socket.send('哈喽啊！'); // 发送消息
+    }
+
+    function closeWS() {
+        socket.close();
+    }
+</script>
+</html>

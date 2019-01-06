@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="trackCounter" class="soundsystem.TrackCounter"/>
+
+    <bean id="cd" class="soundsystem.album.BlankDisc">
+        <property name="title" value="Seventeen"/>
+        <property name="artist" value="Xxxtentacion"/>
+        <property name="tracks">
+            <list>
+                <value>The Explannation</value>
+                <value>Jocelyn Flores</value>
+                <value>Depression &amp; Obsession</value>
+                <value>Everybody Die In Their Nightmares</value>
+                <value>Revenge</value>
+                <value>Fuck Love</value>
+            </list>
+        </property>
+    </bean>
+
+    <aop:config>
+        <aop:aspect ref="trackCounter">
+            <aop:before method="countTrack" pointcut=
+                    "execution(* soundsystem.album.CompactDisc.playTrack(int))
+                        and args(trackNumber)"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

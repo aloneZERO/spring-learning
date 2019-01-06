@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Spittle</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+    <div class="spittleView">
+        <div class="spittleMessage"></div>
+        <div>
+            <span class="spittleTime"></span>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/utils.js"></script>
+<script>
+    const spittleId = getUrlParam('spittleId');
+    $.ajax({
+        type: 'get',
+        url: apis.spittles.findOne + spittleId,
+        success: function (data) {
+            if (data.result.message === 'success') {
+                let spittle = data.spittle;
+                $('.spittleMessage').html(spittle.message);
+                $('.spittleTime').html(spittle.time);
+            }
+        }, error: function (data) {
+            console.log(JSON.stringify(data));
+        }
+    });
+</script>
+</html>

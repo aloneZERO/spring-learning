@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!--
+        使用web.xml配置DispatcherServlet,
+        并用XML形式配置Spring应用
+    -->
+
+    <!--
+        设置根上下文配置文件位置
+        并被ContextLoaderListener加载
+    -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/config/WEB-INF/spring/root-context.xml</param-value>
+    </context-param>
+
+    <!--注册ContextLoaderListener-->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!--注册Dispatcher Servlet-->
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/config/WEB-INF/spring/appServlet-context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!--将DispatcherServlet映射到“/”根路径-->
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>

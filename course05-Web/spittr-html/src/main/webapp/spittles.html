@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Spitter</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<div class="spittleForm">
+    <h1>Spit it out...</h1>
+    <div class="spittleForm">
+        <textarea id="message" name="message" cols="80" rows="5"></textarea><br/>
+        <input id="latitude" name="latitude" type="hidden">
+        <input id="longitude" name="longitude" type="hidden">
+        <input id="spittleFormBtn" value="Add" type="button"/>
+    </div>
+</div>
+<div class="listTitle">
+    <h1>Recent Spittles</h1>
+    <ul class="spittleList"></ul>
+    <!--<c:if test="${fn:length(spittleList) gt 20}">-->
+        <!--<hr/>-->
+        <!--<s:url value="/spittles?count=${nextCount}" var="more_url"/>-->
+        <!--<a href="${more_url}">Show more</a>-->
+    <!--</c:if>-->
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/spittles.js"></script>
+</html>

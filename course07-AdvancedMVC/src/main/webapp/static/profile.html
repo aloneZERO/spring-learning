@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Spitter</title>
+    <link rel="stylesheet" type="text/css"
+          href="/static/css/style.css">
+</head>
+<body>
+    <h1>Your Profile</h1>
+    <span><img class="spitter-avatar" alt="avatar" src=""/></span><br/>
+    <span class="spitter-username"></span><br/>
+    <span class="spitter-firstName"></span>&nbsp;<span class="spitter-lastName"></span><br/>
+    <span class="spitter-email"></span>
+</body>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/utils.js"></script>
+<script>
+    let username = getUrlParam('username');
+    $.ajax({
+       type: 'get',
+       url: apis.spitter.profile+username,
+       success: function (data) {
+           let spitter = data.spitter;
+           if (data.result.message === 'success') {
+               $('.spitter-username').text(spitter.username);
+               $('.spitter-firstName').text(spitter.firstName);
+               $('.spitter-lastName').text(spitter.lastName);
+               $('.spitter-email').text(spitter.email);
+               $('.spitter-avatar').attr("src", avatarRootPath + spitter.avatar);
+           }
+       }
+    });
+</script>
+</html>

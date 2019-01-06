@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--加载本地属性文件-->
+    <bean id="appProps"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:app.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="circle" class="com.springlearn.demo.Circle">
+        <constructor-arg name="radius" value="5" type="int"/>
+    </bean>
+
+    <bean id="musicbox" class="com.springlearn.demo.MusicBox">
+        <property name="songs">
+            <list>
+                <bean class="com.springlearn.demo.disc.BlankDisc"
+                      p:title="九九八十一" p:artist="三无"/>
+                <bean class="com.springlearn.demo.disc.BlankDisc"
+                      p:title="童话镇" p:artist="三无"/>
+                <bean class="com.springlearn.demo.disc.BlankDisc"
+                      p:title="起风了" p:artist="买辣椒也用券"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
