@@ -11,5 +11,13 @@
 
     <artifactId>scopedbeans</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+    </dependencies>
 
 </project>

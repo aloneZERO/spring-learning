@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <!--单一流程：全部搞在一起-->
+
+    <var name="order" class="spizza.domain.Order"/>
+
+    <!--顾客-->
+    <view-state id="welcome">
+        <transition on="phoneEntered" to="lookupCustomer"/>
+        <transition on="cancel" to="endState"/>
+    </view-state>
+
+    <action-state id="lookupCustomer">
+
+    </action-state>
+
+
+    <!--结束状态-->
+    <end-state id="endState" />
+</flow>

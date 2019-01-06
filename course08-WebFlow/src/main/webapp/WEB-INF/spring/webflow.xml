@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/webflow-config
+       http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
+
+    <!--
+        标签前缀可根据：
+            xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+        自定义，此处定义为 webflow
+    -->
+    <!--流程执行器：Spring Web Flow系统的入口-->
+    <webflow:flow-executor id="flow-executor"/>
+
+    <!--流程注册表：加载流程定义并让执行器能使用它们-->
+    <webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows/*">
+        <webflow:flow-location-pattern value="*-flow.xml"/>
+    </webflow:flow-registry>
+
+    <!--将流程请求定向到注册表中的流程-->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping" >
+        <property name="flowRegistry" ref="flowRegistry"/>
+    </bean>
+
+    <!--响应流程请求并处理，等同于MVC中的控制器-->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter" >
+        <property name="flowExecutor" ref="flow-executor"/>
+    </bean>
+
+</beans>
