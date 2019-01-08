@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>course18-WebSocket&amp;STOMP</artifactId>
+    <artifactId>course18-WebSocketAndSTOMP</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>WebSocket</module>
