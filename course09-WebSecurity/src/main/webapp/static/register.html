@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Spitter</title>
+    <link rel="stylesheet" type="text/css"
+          href="/static/css/style.css">
+</head>
+<body>
+<h1>Register</h1>
+
+<div class="registerForm">
+    <table>
+        <tr>
+            <td>First Name: </td>
+            <td><input type="text" name="firstName"/></td>
+            <td>&nbsp;<span id="firstName-error" class="error"></span></td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td><input type="text" name="lastName"/></td>
+            <td>&nbsp;<span id="lastName-error" class="error"></span></td>
+        </tr>
+        <tr>
+            <td>Username: </td>
+            <td><input type="text" name="username"/></td>
+            <td>&nbsp;<span id="username-error" class="error"></span></td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td><input type="email" name="email"/></td>
+            <td>&nbsp;<span id="email-error" class="error"></span></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="password" name="password"/></td>
+            <td>&nbsp;<span id="password-error" class="error"></span></td>
+        </tr>
+        <tr>
+            <td>Avatar: </td>
+            <td><input type="file" id='avatar' name="avatar" value=""
+                       accept="image/jpeg, image/png, image/gif" />
+            </td>
+            <td>&nbsp;<span id="avatar-error" class="error"></span></td>
+        </tr>
+    </table>
+    <input id="registerBtn" type="button" value="Register"/>
+</div>
+</body>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/utils.js"></script>
+<script src="/static/js/spitter.js"></script>
+</html>
