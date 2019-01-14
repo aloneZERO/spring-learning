@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration("classpath:spel-config.xml")
 public class SpEL_Test {
 
+    // T() 操作符用于访问静态属性或静态方法
     @Value("#{T(System).currentTimeMillis()}")
     private long currentTime;
 

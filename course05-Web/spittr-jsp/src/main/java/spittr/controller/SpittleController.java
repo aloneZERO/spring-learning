@@ -34,7 +34,7 @@ public class SpittleController {
     @GetMapping
     public ModelAndView spittles(
             @RequestParam(value = "max", defaultValue = MAX_LONG_AS_STRING) long max,
-            @RequestParam(value = "count", defaultValue = "20") int count) {
+            @RequestParam(value = "count", defaultValue = "6") int count) {
         List<Spittle> spittles = spittleDao.findSpittles(max, count);
         ModelAndView mv = new ModelAndView("spittles");
         mv.addObject("spittleList", spittles);

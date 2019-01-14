@@ -49,11 +49,11 @@ public class SpitterController {
             // 获取图片后缀，拼接成最终图片名
             String[] temp = avatarFile.getOriginalFilename().split("\\.");
             String suffix = temp[temp.length - 1];
-            String fileName = spitterForm.getUsername() + System.currentTimeMillis() + suffix;
+            String fileName = spitterForm.getUsername() + System.currentTimeMillis() + "." + suffix;
             spitter.setAvatar(fileName);
             String rootPath = request.getServletContext().getRealPath("/");
             avatarFile.transferTo(
-                    new File(rootPath + "static/img/avatar/" + fileName));
+                    new File(rootPath + "/static/img/avatar/" + fileName));
         }
 
         spitterDao.save(spitter);

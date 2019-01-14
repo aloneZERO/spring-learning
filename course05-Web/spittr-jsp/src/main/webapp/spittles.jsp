@@ -32,8 +32,8 @@
             </li>
         </c:forEach>
     </ul>
-    <%--if length(spittleList) > 20--%>
-    <c:if test="${fn:length(spittleList) gt 20}">
+    <%-- if length(spittleList) >= 6 --%>
+    <c:if test="${fn:length(spittleList) ge 6}">
         <hr/>
         <s:url value="/spittles?count=${nextCount}" var="more_url"/>
         <a href="${more_url}">Show more</a>

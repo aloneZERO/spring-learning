@@ -21,8 +21,8 @@ public class SpittleDaoJdbcImpl implements SpittleDao {
     public List<Spittle> findRecentSpittles() {
         return jdbc.query(
                 "SELECT id, message, created_at, latitude, longitude" +
-                        " FROM Spittle" +
-                        " ORDER BY created_at DESC LIMIT 20",
+                        " FROM spittle" +
+                        " ORDER BY created_at DESC LIMIT 6",
                 new SpittleRowMapper());
     }
 
@@ -30,17 +30,17 @@ public class SpittleDaoJdbcImpl implements SpittleDao {
     public List<Spittle> findSpittles(long max, int count) {
         return jdbc.query(
                 "SELECT id, message, created_at, latitude, longitude" +
-                        " FROM Spittle" +
+                        " FROM spittle" +
                         " WHERE id <= ?" +
-                        " ORDER BY created_at DESC LIMIT 20",
-                new SpittleRowMapper(), max);
+                        " ORDER BY created_at DESC LIMIT ?",
+                new SpittleRowMapper(), max, count);
     }
 
     @Override
     public Spittle findOne(long id) {
         return jdbc.queryForObject(
                 "SELECT id, message, created_at, latitude, longitude" +
-                        " FROM Spittle" +
+                        " FROM spittle" +
                         " WHERE id = ?",
                 new SpittleRowMapper(), id);
     }
@@ -48,9 +48,8 @@ public class SpittleDaoJdbcImpl implements SpittleDao {
     @Override
     public void save(Spittle spittle) {
         jdbc.update(
-                "INSERT INTO Spittle (id, message, created_at, latitude, longitude)" +
-                        " VALUES (?, ?, ?, ?, ?)",
-                spittle.getId(),
+                "INSERT INTO spittle (message, created_at, latitude, longitude)" +
+                        " VALUES (?, ?, ?, ?)",
                 spittle.getMessage(),
                 spittle.getTime(),
                 spittle.getLatitude(),

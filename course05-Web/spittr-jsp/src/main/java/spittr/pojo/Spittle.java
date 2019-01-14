@@ -28,7 +28,7 @@ public class Spittle {
     }
 
     public Spittle(String message, Date time, Double latitude, Double longitude) {
-        this.id = Math.abs(new Random().nextLong());
+        this.id = null;
         this.message = message;
         this.time = time;
         this.latitude = latitude;

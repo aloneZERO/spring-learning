@@ -12,7 +12,6 @@ import java.util.Random;
 @AllArgsConstructor
 public class Spitter {
 
-    @NotNull
     private Long id;
 
     @NotNull
@@ -41,8 +40,7 @@ public class Spitter {
 
     public Spitter(String username, String password, String
             firstName, String lastName, String email) {
-        this(new Random().nextLong(), username, password,
-                firstName, lastName, email);
+        this(null, username, password, firstName, lastName, email);
     }
 
 }

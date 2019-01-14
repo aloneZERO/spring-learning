@@ -23,9 +23,9 @@ public class SpitterDaoJdbcImpl implements SpitterDao {
 
     public Spitter save(Spitter spitter) {
         jdbc.update(
-                "INSERT INTO Spitter (id, username, password, first_name, last_name, email)" +
-                        " VALUES (?, ?, ?, ?, ?, ?)",
-                spitter.getId(),
+                "INSERT INTO " +
+                        "spitter (username, password, first_name, last_name, email)" +
+                        " VALUES (?, ?, ?, ?, ?)",
                 spitter.getUsername(),
                 spitter.getPassword(),
                 spitter.getFirstName(),
@@ -36,7 +36,9 @@ public class SpitterDaoJdbcImpl implements SpitterDao {
 
     public Spitter findByUsername(String username) {
         return jdbc.queryForObject(
-                "SELECT id, username, NULL, first_name, last_name, email FROM Spitter WHERE username=?",
+                "SELECT " +
+                        "id, username, NULL, first_name, last_name, email " +
+                        "FROM spitter WHERE username=?",
                 new SpitterRowMapper(),
                 username);
     }

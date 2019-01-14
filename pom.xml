@@ -15,8 +15,10 @@
         <module>course05-Web</module>
         <module>course06-WebView</module>
         <module>course07-AdvancedMVC</module>
-        <module>course18-WebSocket&amp;STOMP</module>
+        <module>course18-WebSocketAndSTOMP</module>
         <module>course08-WebFlow</module>
+        <module>course09-WebSecurity</module>
+        <module>course10-JDBC</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -25,11 +27,11 @@
         <jdk.version>1.8</jdk.version>
         <spring.version>4.3.0.RELEASE</spring.version>
         <spring.webflow.version>2.5.1.RELEASE</spring.webflow.version>
+        <spring.security.version>4.2.10.RELEASE</spring.security.version>
         <junit.version>4.12</junit.version>
         <systemRules.version>1.5.0</systemRules.version>
         <mockito.version>2.21.0</mockito.version>
         <lombok.version>1.18.4</lombok.version>
-        <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.7.25</slf4j.version>
         <servlet.version>3.1.0</servlet.version>
         <jstl.version>1.2</jstl.version>
@@ -43,6 +45,7 @@
         <reactor.version>2.0.5.RELEASE</reactor.version>
         <netty.version>4.0.31.Final</netty.version>
         <commons.text.version>1.6</commons.text.version>
+        <jetty-maven-plugin.version>9.4.8.v20171121</jetty-maven-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -99,6 +102,17 @@
                 <artifactId>spring-webflow</artifactId>
                 <version>${spring.webflow.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
 
             <!-- 消息代理 -->
             <dependency>
@@ -218,10 +232,6 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
 
@@ -232,17 +242,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.stefanbirkner</groupId>
-            <artifactId>system-rules</artifactId>
-            <!-- 排除依赖冲突的包 -->
-            <exclusions>
-                <exclusion>
-                    <artifactId>junit-dep</artifactId>
-                    <groupId>junit</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -258,11 +257,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
         </dependency>
 
     </dependencies>

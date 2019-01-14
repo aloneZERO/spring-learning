@@ -67,7 +67,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder()
                 .indentOutput(true)
-                // Long值过大，JS会发生精度缺失，故解析成String
+                // Long值过大，JS会发生精度缺失，故配置为String解析
                 .serializerByType(Long.class, ToStringSerializer.instance)
                 .serializerByType(Long.TYPE, ToStringSerializer.instance)
                 .dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")) // 处理日期

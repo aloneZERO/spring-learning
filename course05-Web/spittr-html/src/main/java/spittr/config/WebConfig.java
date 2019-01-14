@@ -1,6 +1,7 @@
 package spittr.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +47,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder()
                 .indentOutput(true)
+                // Long值过大，JS会发生精度缺失，故配置为String解析
+                .serializerByType(Long.class, ToStringSerializer.instance)
+                .serializerByType(Long.TYPE, ToStringSerializer.instance)
                 .dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")) // 处理日期
                 .serializationInclusion(JsonInclude.Include.NON_NULL); // 不显示NULL值字段
         converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
