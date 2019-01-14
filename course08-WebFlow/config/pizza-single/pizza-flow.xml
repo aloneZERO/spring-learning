@@ -47,7 +47,7 @@
                  value="new spizza.domain.Pizza()"/>
 
             <evaluate result="viewScope.toppingsList"
-                      expression="@spizza.domain.Topping@asList()"/>
+                      expression="T(spizza.domain.Topping).asList()"/>
         </on-entry>
         <transition on="addPizza" to="showOrder">
             <evaluate expression="order.addPizza(flowScope.pizza)"/>
@@ -62,7 +62,7 @@
                  value="new spizza.domain.PaymentDetails()"/>
 
             <evaluate result="viewScope.paymentTypeList"
-                      expression="@spizza.domain.PaymentType@asList()"/>
+                      expression="T(spizza.domain.PaymentType).asList()"/>
         </on-entry>
         <transition on="paymentSubmitted" to="verifyPayment"/>
         <transition on="cancel" to="endState"/>

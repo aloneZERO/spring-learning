@@ -16,8 +16,8 @@
     <webflow:flow-executor id="flow-executor"/>
 
     <!--流程注册表：加载流程定义并让执行器能使用它们-->
-    <webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows/*">
-        <webflow:flow-location-pattern value="*-flow.xml"/>
+    <webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows">
+        <webflow:flow-location-pattern value="/**/*-flow.xml"/>
     </webflow:flow-registry>
 
     <!--将流程请求定向到注册表中的流程-->
