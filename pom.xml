@@ -15,17 +15,17 @@
         <module>course05-Web</module>
         <module>course06-WebView</module>
         <module>course07-AdvancedMVC</module>
-        <module>course18-WebSocketAndSTOMP</module>
         <module>course08-WebFlow</module>
         <module>course09-WebSecurity</module>
         <module>course10-JDBC</module>
+        <module>course18-WebSocketAndSTOMP</module>
     </modules>
 
     <packaging>pom</packaging>
 
     <properties>
         <jdk.version>1.8</jdk.version>
-        <spring.version>4.3.0.RELEASE</spring.version>
+        <spring.version>5.1.4.RELEASE</spring.version>
         <spring.webflow.version>2.5.1.RELEASE</spring.webflow.version>
         <spring.security.version>4.2.10.RELEASE</spring.security.version>
         <junit.version>4.12</junit.version>
@@ -45,9 +45,27 @@
         <reactor.version>2.0.5.RELEASE</reactor.version>
         <netty.version>4.0.31.Final</netty.version>
         <commons.text.version>1.6</commons.text.version>
-        <jetty-maven-plugin.version>9.4.8.v20171121</jetty-maven-plugin.version>
+        <mysql-jdbc.version>5.1.40</mysql-jdbc.version>
+        <dbcp2.version>2.2.0</dbcp2.version>
+        <jetty.version>9.4.14.v20181114</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <!-- 配置 JDK -->
+    <profiles>
+        <profile>
+            <id>jdk-${jdk.version}</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>${jdk.version}</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>${jdk.version}</maven.compiler.source>
+                <maven.compiler.target>${jdk.version}</maven.compiler.target>
+                <maven.compiler.compilerVersion>${jdk.version}</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+    </profiles>
 
     <!--
         管理所有依赖的版本号
@@ -112,7 +130,6 @@
                 <artifactId>spring-security-config</artifactId>
                 <version>${spring.security.version}</version>
             </dependency>
-
 
             <!-- 消息代理 -->
             <dependency>
@@ -194,6 +211,18 @@
                 <artifactId>h2</artifactId>
                 <version>${h2DB.version}</version>
             </dependency>
+            <!-- MySQL JDBC -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-jdbc.version}</version>
+            </dependency>
+            <!-- 数据库连接池 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>${dbcp2.version}</version>
+            </dependency>
 
             <!-- 代码优化 -->
             <dependency>
@@ -222,6 +251,18 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
                 <version>${commons.text.version}</version>
+            </dependency>
+
+            <!-- Jetty -->
+            <dependency>
+                <groupId>org.eclipse.jetty.websocket</groupId>
+                <artifactId>websocket-server</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty.websocket</groupId>
+                <artifactId>websocket-api</artifactId>
+                <version>${jetty.version}</version>
             </dependency>
 
         </dependencies>
@@ -254,24 +295,35 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <includeEmptyDirectories>true</includeEmptyDirectories>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <httpConnector>
+                        <port>80</port>
+                    </httpConnector>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
