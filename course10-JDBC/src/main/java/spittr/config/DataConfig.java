@@ -3,6 +3,9 @@ package spittr.config;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jndi.JndiObjectFactoryBean;
@@ -70,4 +73,18 @@ public class DataConfig {
                 .addScript("sql/test-data.sql")
                 .build();
     }
+
+    // 把原生 JDBC 代码中的资源管理、异常处理等模板式的代码
+    // 交给 Spring JDBC Template 完成，关注于 SQL 本身。
+    // 返回 JdbcOperations 接口，达到与 JdbcTemplate 保持松耦合
+    @Bean
+    public JdbcOperations jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    // 可为 SQL 参数绑定自定义命名
+//    @Bean
+//    public JdbcOperations jdbcTemplate(DataSource dataSource) {
+//        return new NamedParameterJdbcTemplate(dataSource)
+//    }
 }

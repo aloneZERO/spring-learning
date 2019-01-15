@@ -21,12 +21,12 @@ public class WebAppInitializer
         return new Class<?>[] { DataConfig.class };
     }
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        // 设置默认的 profile（选用数据源）
-        servletContext.setInitParameter("spring.profiles.default", "dev");
-        super.onStartup(servletContext);
-    }
+//    @Override
+//    public void onStartup(ServletContext servletContext) throws ServletException {
+//        // 设置默认的 profile（选用数据源）
+//        servletContext.setInitParameter("spring.profiles.default", "dev");
+//        super.onStartup(servletContext);
+//    }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
