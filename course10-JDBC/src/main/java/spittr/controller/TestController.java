@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @Slf4j
 @Controller
 @AllArgsConstructor
-public class DsController {
+public class TestController {
 
     private DataSource dataSource;
 
