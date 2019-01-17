@@ -44,8 +44,8 @@
         <jackson.version>2.9.0</jackson.version>
         <fastjson.version>1.2.47</fastjson.version>
         <fileupload.version>1.3.3</fileupload.version>
-        <reactor.version>2.0.5.RELEASE</reactor.version>
-        <netty.version>4.0.31.Final</netty.version>
+        <reactor-netty.version>0.8.4.RELEASE</reactor-netty.version>
+        <netty.version>4.1.32.Final</netty.version>
         <commons.text.version>1.6</commons.text.version>
         <mysql-jdbc.version>5.1.40</mysql-jdbc.version>
         <dbcp2.version>2.2.0</dbcp2.version>
@@ -143,14 +143,9 @@
 
             <!-- 消息代理 -->
             <dependency>
-                <groupId>io.projectreactor</groupId>
-                <artifactId>reactor-net</artifactId>
-                <version>${reactor.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.projectreactor.spring</groupId>
-                <artifactId>reactor-spring-context</artifactId>
-                <version>${reactor.version}</version>
+                <groupId>io.projectreactor.netty</groupId>
+                <artifactId>reactor-netty</artifactId>
+                <version>${reactor-netty.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.netty</groupId>
