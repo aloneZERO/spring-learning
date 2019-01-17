@@ -29,6 +29,7 @@
         <spring.version>5.1.4.RELEASE</spring.version>
         <spring.webflow.version>2.5.1.RELEASE</spring.webflow.version>
         <spring.security.version>4.2.10.RELEASE</spring.security.version>
+        <spring.data-jpa.version>2.1.4.RELEASE</spring.data-jpa.version>
         <junit.version>4.12</junit.version>
         <systemRules.version>1.5.0</systemRules.version>
         <mockito.version>2.21.0</mockito.version>
@@ -51,6 +52,7 @@
         <jetty.version>9.4.14.v20181114</jetty.version>
         <mybatis.version>3.4.6</mybatis.version>
         <mybatis-spring.version>1.3.2</mybatis-spring.version>
+        <hibernate.version>5.4.0.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -132,6 +134,11 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
                 <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${spring.data-jpa.version}</version>
             </dependency>
 
             <!-- 消息代理 -->
@@ -227,6 +234,23 @@
                 <version>${dbcp2.version}</version>
             </dependency>
 
+            <!-- ORM -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
             <!-- 代码优化 -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -266,18 +290,6 @@
                 <groupId>org.eclipse.jetty.websocket</groupId>
                 <artifactId>websocket-api</artifactId>
                 <version>${jetty.version}</version>
-            </dependency>
-
-            <!-- ORM -->
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis-spring.version}</version>
             </dependency>
 
         </dependencies>
