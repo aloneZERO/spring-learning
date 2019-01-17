@@ -3,12 +3,16 @@ package spittr.config;
 import org.apache.ibatis.logging.log4j.Log4jImpl;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -17,6 +21,7 @@ import javax.sql.DataSource;
  * @since 2019/1/16
  */
 @Configuration
+@EnableTransactionManagement
 @ComponentScan("spittr")
 @MapperScan("spittr.dao")
 public class DataConfig {
@@ -45,12 +50,15 @@ public class DataConfig {
     }
 
     @Bean
-    public DataSourceTransactionManager transactionManager(
+    public PlatformTransactionManager transactionManager(
             DataSource dataSource) {
-        DataSourceTransactionManager tm =
-                new DataSourceTransactionManager();
-        tm.setDataSource(dataSource);
-        return tm;
+        return new DataSourceTransactionManager(dataSource);
     }
+
+    // 将所有数据访问异常转换为 Spring 体系异常
+//    @Bean
+//    public BeanPostProcessor daoExceptionTranslation() {
+//        return new PersistenceExceptionTranslationPostProcessor();
+//    }
 
 }

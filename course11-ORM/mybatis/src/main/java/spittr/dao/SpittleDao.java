@@ -2,6 +2,7 @@ package spittr.dao;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import spittr.po.Spittle;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @since 2019/1/15
  */
 @Repository
+@Transactional
 public interface SpittleDao {
 
     @Select("select count(id) from spittle")
@@ -50,7 +52,7 @@ public interface SpittleDao {
     @Select("select " +
             "sp.id, s.id as spitterId, s.username, s.fullname, " +
             "s.email, s.updateByEmail, sp.message, sp.postedTime " +
-            "from spittle sp, spitter s where sp.spitter = s.id and sp.ID=#{id}")
+            "from spittle sp, spitter s where sp.spitter = s.id and sp.id=#{id}")
     @Results({
             @Result(property = "id", column = "id", id = true),
             @Result(property = "spitter.id", column = "spitterId"),

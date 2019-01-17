@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import spittr.config.DataConfig;
 import spittr.dao.SpitterDao;
 import spittr.dao.SpittleDao;
@@ -27,6 +28,7 @@ public class SpittleDaoTest {
     private SpitterDao spitterDao;
 
     @Test
+    @Transactional
     public void count() {
         long count = spittleDao.count();
         assert count > 0;
@@ -34,6 +36,7 @@ public class SpittleDaoTest {
     }
 
     @Test
+    @Transactional
     public void findRecent() {
         List<Spittle> spittles = spittleDao.findRecent();
         assertNotNull(spittles);
@@ -46,8 +49,9 @@ public class SpittleDaoTest {
     }
 
     @Test
+    @Transactional
     public void findRecentByCount() {
-        List<Spittle> spittles = spittleDao.findRecentByCount(2);
+        List<Spittle> spittles = spittleDao.findRecent(2);
         assertNotNull(spittles);
         assertEquals(2, spittles.size());
         for (Spittle s: spittles) {
@@ -58,14 +62,16 @@ public class SpittleDaoTest {
     }
 
     @Test
+    @Transactional
     public void findById() {
-        Spittle spittle = spittleDao.findById(1235);
+        Spittle spittle = spittleDao.findById(1235L).orElse(null);
         assertNotNull(spittle);
-        printSpittle(spittle);
         assertNotNull(spittle.getSpitter());
+        printSpittle(spittle);
     }
 
     @Test
+    @Transactional
     public void findBySpitterId() {
         List<Spittle> spittles = spittleDao.findBySpitterId(2333);
         assertNotNull(spittles);
@@ -78,24 +84,29 @@ public class SpittleDaoTest {
     }
 
     @Test
+    @Transactional
     public void save() {
         Spitter spitter = spitterDao.findByUsername("leo");
+        assertNotNull(spitter);
+
         Spittle spittle = new Spittle();
         spittle.setSpitter(spitter);
-        spittle.setMessage("I am using mybatis!");
+        spittle.setMessage("I am using JPA!");
         printSpittle(spittle);
 
-        int res = spittleDao.save(spittle);
+        spittle = spittleDao.save(spittle);
 
-        assertEquals(1, res);
         assertNotNull(spittle.getId());
         printSpittle(spittle);
     }
 
     @Test
+    @Transactional
     public void delete() {
-        int res = spittleDao.delete(1234);
-        assertEquals(1, res);
+        long targetId = 1234L;
+        assert spittleDao.existsById(targetId);
+        spittleDao.deleteById(targetId);
+        assert !spittleDao.existsById(targetId);
     }
 
     private void printSpittle(Spittle s) {

@@ -2,6 +2,7 @@ package spittr.dao;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import spittr.po.Spitter;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @since 2019/1/15
  */
 @Repository
+@Transactional
 public interface SpitterDao {
 
     @Select("select count(id) from spitter")
