@@ -18,9 +18,10 @@ public interface OrderDao extends MongoRepository<Order, String> {
 
     List<Order> findByCustomerAndType(String customer, String type);
 
-    List<Order> getByType(String type);
-
     @Query("{customer:'Leo'}")
     List<Order> findLeoOrders();
 
+    // 如果要传递参数，可使用 ?0, ?1 etc.和参数列表匹配
+    @Query("{customer:'Leo', type:?0}")
+    List<Order> findLeoOrdersByType(String type);
 }

@@ -16,9 +16,18 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
         </dependency>
+        <!--
+            注意：Spring Data Redis 2.1.4.RELEASE 和 jedis 3.x 版本不兼容。
+                 降低 jedis 版本为 2.10.1 问题解决。
+        -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
     </dependencies>
 

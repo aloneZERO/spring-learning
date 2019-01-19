@@ -27,22 +27,29 @@ public class MongoDbTest {
     @Autowired
     private OrderDao orderDao;
 
-    @Before
-    public void cleanup() {
-        // 每次测试方法执行前，删除所有订单，避免之前有错误测试的残留数据影响新的测试
-        orderDao.deleteAll();
-    }
-
     @Test
     public void testCreateOrders() {
+        orderDao.deleteAll();
+
         Order order = OrderUtil.createRandomOrder("Leo");
-        OrderUtil.printOrder(order);
         order = orderDao.save(order);
         OrderUtil.printOrder(order);
+
+        order = OrderUtil.createRandomOrder("Leo");
+        order = orderDao.save(order);
+        OrderUtil.printOrder(order);
+
+        List<Order> leoWebOrders = orderDao.findLeoOrdersByType("网站");
+        System.out.println("================ Leo WEB Orders ================");
+        System.out.println(leoWebOrders.size());
+        leoWebOrders.forEach(OrderUtil::printOrder);
     }
 
     @Test
     public void testAll() {
+        // 测试前清空全部订单
+        orderDao.deleteAll();
+
         assertEquals(0, orderDao.count());
         Order order = OrderUtil.createRandomOrder("Leo");
         OrderUtil.printOrder(order);

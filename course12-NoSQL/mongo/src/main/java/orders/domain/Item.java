@@ -21,7 +21,7 @@ public class Item {
 
     private String product;
 
-    private double price;
+    private float price;
 
     private int quantity;
 

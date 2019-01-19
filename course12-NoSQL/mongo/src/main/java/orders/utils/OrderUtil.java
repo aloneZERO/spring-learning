@@ -18,8 +18,10 @@ public class OrderUtil {
     public static final String WEB = "网站";
     public static final String PHONE = "手机";
 
+    private static Random random = new Random(System.currentTimeMillis());
+
     public static String randomType() {
-        int flag = new Random().nextInt(2);
+        int flag = random.nextInt(2);
         return flag==0 ? WEB : PHONE;
     }
 
@@ -27,14 +29,13 @@ public class OrderUtil {
         Order order = new Order();
         order.setCustomer(customer);
         order.setType(randomType());
-        Random random = new Random();
         int itemNum = random.nextInt(10);
         List<Item> items = new ArrayList<>(itemNum);
         for (int i=0; i< itemNum; i++) {
             Item item = new Item();
             item.setProduct("测试产品"+random.nextFloat());
             item.setQuantity(random.nextInt(21));
-            item.setPrice( Math.floor((10+((100-10)*random.nextDouble()))*100/1)*0.01 );
+            item.setPrice(randomFloat(10, 100));
             items.add(item);
         }
         order.setItems(items);
@@ -53,6 +54,17 @@ public class OrderUtil {
                     ", quantity-"+item.getQuantity());
         }
         System.out.println("--------------------------------------------\n");
+    }
+
+    /**
+     *  随机生成一个指定范围的双精度浮点数
+     * @param min 下限
+     * @param max 上限
+     * @return 随机双精度浮点数，范围 (min, max)
+     */
+    private static float randomFloat(int min, int max) {
+        Float val = ( min+((max-min)*random.nextFloat()) )*100;
+        return val.intValue()*0.01f;
     }
 
 }
