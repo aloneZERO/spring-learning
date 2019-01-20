@@ -21,6 +21,7 @@
         <module>course18-WebSocketAndSTOMP</module>
         <module>course11-ORM</module>
         <module>course12-NoSQL</module>
+        <module>course13-Cache</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -56,6 +57,9 @@
         <hibernate.version>5.4.0.Final</hibernate.version>
         <mongo-jdbc.version>3.9.1</mongo-jdbc.version>
         <jedis.version>2.10.1</jedis.version>
+        <ehcache.version>3.6.3</ehcache.version>
+        <ehcache-old.version>2.10.6</ehcache-old.version>
+        <jcache.version>1.0.1</jcache.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -86,6 +90,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
@@ -319,6 +328,22 @@
                 <version>${jetty.version}</version>
             </dependency>
 
+            <!-- 缓存 -->
+            <dependency>
+                <groupId>org.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache-old.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ehcache</groupId>
+                <artifactId>jcache</artifactId>
+                <version>${jcache.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
