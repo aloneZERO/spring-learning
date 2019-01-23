@@ -22,6 +22,7 @@
         <module>course11-ORM</module>
         <module>course12-NoSQL</module>
         <module>course13-Cache</module>
+        <module>course16-RESTful</module>
     </modules>
 
     <packaging>pom</packaging>
