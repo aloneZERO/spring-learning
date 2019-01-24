@@ -11,6 +11,4 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("com.springlearn.demo")
 public class DemoConfig {
 
-
-
 }

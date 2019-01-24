@@ -7,14 +7,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import spittr.data.SpittleDao;
+import spittr.dao.SpittleDao;
 import spittr.exception.SpittleNotFoundException;
 import spittr.pojo.Error;
 import spittr.pojo.Spittle;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.net.URLDecoder;
 import java.util.List;
 
 /**

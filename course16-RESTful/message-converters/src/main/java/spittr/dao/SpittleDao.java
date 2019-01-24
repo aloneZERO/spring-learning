@@ -1,4 +1,4 @@
-package spittr.data;
+package spittr.dao;
 
 import java.util.List;
 
