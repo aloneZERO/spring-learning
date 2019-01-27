@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        img {
+            width: 200px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <img src="../attachment/avatar.jpg" th:src="${image}" /><br/>
+    <h3 style="display: inline">
+        <span th:text="${spitterName}">默认名</span>说到：
+    </h3>
+    <i><span th:text="${spittleText}">默认内容</span></i>
+</body>
+</html>

@@ -19,7 +19,7 @@ import java.util.Arrays;
 @Configuration
 @ComponentScan("spittr")
 @PropertySource("classpath:mail.properties")
-public class MailConfig {
+public class GreenMailConfig {
 
     @Value("${mailserver.host}")
     private String host;
@@ -34,7 +34,7 @@ public class MailConfig {
     public GreenMailBean greenMail() {
         GreenMailBean greenMailBean = new GreenMailBean();
         greenMailBean.setUsers(Arrays
-                .asList("app:letmein01@spitter.com"));
+                .asList(genGreenMailUser()));
         return greenMailBean;
     }
 
@@ -46,6 +46,11 @@ public class MailConfig {
         mailSender.setUsername(username);
         mailSender.setPassword(password);
         return mailSender;
+    }
+
+    private String genGreenMailUser() {
+        String[] userInfo = username.split("@");
+        return userInfo[0] + ":" + password + "@" + userInfo[1];
     }
 
 }
