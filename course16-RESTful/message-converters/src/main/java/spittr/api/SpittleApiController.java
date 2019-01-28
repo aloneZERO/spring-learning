@@ -50,13 +50,13 @@ public class SpittleApiController {
      * 只有这样 Spring MVC 才能解析成功。
      */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Spittle> saveSpittle(
             @RequestBody Spittle spittle,
             UriComponentsBuilder ucb) {
         System.out.println(spittle.getMessage());
         Spittle saved = spittleDao.save(spittle);
 
+        // 设置响应的头部信息，就必须用到 ResponseEntity
         HttpHeaders headers = new HttpHeaders();
         URI locationUri = ucb.path("/spittles/")
                 .path(saved.getId().toString())
@@ -66,9 +66,8 @@ public class SpittleApiController {
         return new ResponseEntity<>(saved, headers, HttpStatus.CREATED);
     }
 
-    @ExceptionHandler(SpittleNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
+    @ExceptionHandler(SpittleNotFoundException.class)
     public Error spittleNotFound(SpittleNotFoundException e) {
         long spittleId = e.getSpittleId();
         return new Error(4, "Spittle [" + spittleId + "] not found");

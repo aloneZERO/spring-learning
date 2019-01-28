@@ -26,7 +26,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan("spittr.controller")
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements WebMvcConfigurer {
 
     // 配置静态资源访问
     @Override
