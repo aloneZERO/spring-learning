@@ -9,6 +9,7 @@ import spittr.pojo.Spittle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -61,7 +62,7 @@ public class SpittleDaoJdbcImpl implements SpittleDao {
             return new Spittle(
                     rs.getLong("id"),
                     rs.getString("message"),
-                    rs.getDate("created_at"),
+                    rs.getTimestamp("created_at"),
                     rs.getDouble("longitude"),
                     rs.getDouble("latitude"));
         }

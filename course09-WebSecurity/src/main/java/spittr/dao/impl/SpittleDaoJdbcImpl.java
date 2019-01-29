@@ -62,7 +62,7 @@ public class SpittleDaoJdbcImpl implements SpittleDao {
             return new Spittle(
                     rs.getLong("id"),
                     rs.getString("message"),
-                    rs.getDate("created_at"),
+                    rs.getTimestamp("created_at"),
                     rs.getDouble("longitude"),
                     rs.getDouble("latitude"));
         }

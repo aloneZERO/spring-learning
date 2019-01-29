@@ -23,14 +23,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan("spittr.controller")
-public class WebConfig extends WebMvcConfigurerAdapter {
-
-    // 配置静态资源访问
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
-        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
-    }
+public class WebConfig implements WebMvcConfigurer {
 
     // 配置视图解析
     @Bean
@@ -42,7 +35,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    // 配置JSON解析
+    // 配置 JSON 解析
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder()
@@ -55,6 +48,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
     }
 
+    // 允许静态资源直接访问
     @Override
     public void configureDefaultServletHandling(
             DefaultServletHandlerConfigurer configurer) {

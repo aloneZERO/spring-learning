@@ -10,12 +10,31 @@
 <h1>Register</h1>
 
 <form method="POST">
-    First Name: <input type="text" name="firstName"/><br/>
-    Last Name: <input type="text" name="lastName"/><br/>
-    Email: <input type="email" name="email"/><br/>
-    Username: <input type="text" name="username"/><br/>
-    Password: <input type="password" name="password"/><br/>
-    <input type="submit" value="Register"/>
+    <table>
+        <tr>
+            <td>First Name: </td>
+            <td><input type="text" name="firstName"/></td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td><input type="text" name="lastName"/></td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td><input type="email" name="email"/></td>
+        </tr>
+        <tr>
+            <td>Username: </td>
+            <td><input type="text" name="username"/></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="password" name="password"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Register"/></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

@@ -13,6 +13,8 @@ import spittr.dao.SpitterDao;
 import spittr.pojo.Spitter;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 
 @Slf4j
@@ -30,7 +32,8 @@ public class SpitterController {
 
     @PostMapping("/register")
     public String processRegistration(
-            @Valid Spitter spitter, Errors errors) {
+            @Valid Spitter spitter, Errors errors)
+            throws UnsupportedEncodingException {
         log.info("{}", errors.getFieldErrors());
 
         if (errors.hasErrors()) {
@@ -38,7 +41,9 @@ public class SpitterController {
         }
 
         spitterDao.save(spitter);
-        return "redirect:/spitter/" + spitter.getUsername();
+        return "redirect:/spitter/" +
+                // 地址含有中文，不编码会被 Spring MVC 自动过滤掉
+                URLEncoder.encode(spitter.getUsername(), "utf-8");
     }
 
     @GetMapping("/{username}")

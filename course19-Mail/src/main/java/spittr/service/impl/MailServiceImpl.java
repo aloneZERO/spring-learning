@@ -5,17 +5,14 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring4.SpringTemplateEngine;
 import spittr.domain.Spittle;
 import spittr.service.MailService;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
-import java.io.UnsupportedEncodingException;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +20,7 @@ public class MailServiceImpl implements MailService {
 
     private JavaMailSenderImpl mailSender;
 
-    private TemplateEngine thymeleaf;
+    private ITemplateEngine thymeleaf;
 
     @Override
     public void sendSimpleSpittleEmail(String to, Spittle spittle)

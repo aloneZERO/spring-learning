@@ -44,7 +44,8 @@ public class SpittrWebAppInitializer
      */
     @Override
     protected Filter[] getServletFilters() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        CharacterEncodingFilter characterEncodingFilter =
+                new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
         return new Filter[] { characterEncodingFilter };

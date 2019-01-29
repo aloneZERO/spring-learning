@@ -38,19 +38,14 @@ public class SpittleController {
         List<Spittle> spittles = spittleDao.findSpittles(max, count);
         ModelAndView mv = new ModelAndView("spittles");
         mv.addObject("spittleList", spittles);
-
-        log.info("max = {}", max);
-        log.info("Spittles: {}", spittles);
         return mv;
     }
 
     @PostMapping
-    public String saveSpittle(SpittleForm form, Model model) throws Exception {
+    public String saveSpittle(SpittleForm form) {
         log.info("{}", form);
 
-        spittleDao.save(
-                new Spittle(form.getMessage(), new Date(),
-                        form.getLatitude(), form.getLatitude()));
+        spittleDao.save(form.toSpittle());
         return "redirect:/spittles";
     }
 

@@ -3,12 +3,14 @@ package spittr.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Random;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Spitter {
 
@@ -33,10 +35,6 @@ public class Spitter {
     @NotNull
     @Email
     private String email;
-
-    public Spitter() {
-        this.id = new Random().nextLong();
-    }
 
     public Spitter(String username, String password, String
             firstName, String lastName, String email) {
