@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.2.xsd
+		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        XML 配置 JMS。仅供参考
+        在两个测试示例中，不能直接使用该配置
+     -->
+
+    <context:property-placeholder location="jms.properties"/>
+
+    <!--
+        ActiveMQ 特有的命名空间，
+        和用 <bean> 标签效果一样
+    -->
+    <amq:queue id="spittleQueue" physicalName="${spittle.queueName}"/>
+
+    <amq:topic id="spittleTopic" physicalName="${spittle.topicName}"/>
+
+    <amq:connectionFactory id="connectionFactory"
+                           brokerURL="${mq.brokerUrl}"
+                           trustAllPackages="true" />
+
+    <bean id="jmsTemplate"
+          class="org.springframework.jms.core.JmsTemplate"
+          c:_0-ref="connectionFactory"
+          p:defaultDestinationName="spittle.alert.queue"/>
+
+    <bean id="messageConverter"
+          class="org.springframework.jms.support.converter.MappingJackson2MessageConverter"/>
+
+    <bean id="alertService" class="spittr.alerts.AlertServiceImpl"
+          c:_0-ref="jmsTemplate"/>
+
+    <jms:listener-container>
+        <jms:listener destination="${spittle.queueName}"
+                      ref="spittleHandler"
+                      method="handleSpittleAlert"/>
+    </jms:listener-container>
+
+    <bean id="spittleHandler"
+          class="spittr.listener.SpittleAlertListener"
+          c:_0-ref="org.springframework.jms.config.internalJmsListenerEndpointRegistry"/>
+
+</beans>

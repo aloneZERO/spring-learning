@@ -39,7 +39,8 @@ public class WebConfig implements WebMvcConfigurer {
     // 配置视图解析
     @Bean
     public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        InternalResourceViewResolver resolver =
+                new InternalResourceViewResolver();
         resolver.setPrefix("/static/");
         resolver.setSuffix(".html");
         resolver.setExposeContextBeansAsAttributes(true);
