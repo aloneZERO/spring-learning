@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns="http://www.springframework.org/schema/beans">
+
+    <!-- 导入公共配置 -->
+    <import resource="amqp-shared.xml"/>
+
+    <rabbit:template id="rabbitTemplate"
+                     connection-factory="connectionFactory"
+                     exchange="${spittle.exchangeName}"
+                     queue="${spittle.queueName}"
+                     routing-key="${spittle.queueName}"/>
+
+</beans>

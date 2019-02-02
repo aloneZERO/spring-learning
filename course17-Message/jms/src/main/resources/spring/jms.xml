@@ -36,7 +36,7 @@
     <bean id="messageConverter"
           class="org.springframework.jms.support.converter.MappingJackson2MessageConverter"/>
 
-    <bean id="alertService" class="spittr.alerts.AlertServiceImpl"
+    <bean id="alertService" class="jms.alerts.AlertServiceImpl"
           c:_0-ref="jmsTemplate"/>
 
     <jms:listener-container>
@@ -46,7 +46,7 @@
     </jms:listener-container>
 
     <bean id="spittleHandler"
-          class="spittr.listener.SpittleAlertListener"
-          c:_0-ref="org.springframework.jms.config.internalJmsListenerEndpointRegistry"/>
+          class="jms.listener.SpittleAlertListener"
+          c:_0="org.springframework.jms.config.JmsListenerEndpointRegistry"/>
 
 </beans>
