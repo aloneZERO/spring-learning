@@ -12,8 +12,8 @@
 
     <beans profile="dev">
         <jdbc:embedded-database id="dataSource" type="H2">
-            <jdbc:script location="classpath:schema.sql"/>
-            <jdbc:script location="classpath:test-data.sql"/>
+            <jdbc:script location="sql/schema.sql"/>
+            <jdbc:script location="sql/test-data.sql"/>
         </jdbc:embedded-database>
     </beans>
 

@@ -18,13 +18,13 @@
         <module>course08-WebFlow</module>
         <module>course09-WebSecurity</module>
         <module>course10-JDBC</module>
-        <module>course18-WebSocketAndSTOMP</module>
         <module>course11-ORM</module>
         <module>course12-NoSQL</module>
         <module>course13-Cache</module>
         <module>course16-RESTful</module>
-        <module>course19-Mail</module>
         <module>course17-Message</module>
+        <module>course18-WebSocket</module>
+        <module>course19-Mail</module>
     </modules>
 
     <packaging>pom</packaging>

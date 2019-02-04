@@ -4,7 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--加载本地属性文件-->
+    <!-- 配置该 Bean 是为了测试 SprinEL 时使用 -->
     <bean id="appProps"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
@@ -14,18 +14,21 @@
         </property>
     </bean>
 
-    <bean id="circle" class="com.springlearn.demo.Circle">
+    <!-- 加载本地属性文件 -->
+    <context:property-placeholder location="app.properties"/>
+
+    <bean id="circle" class="externals.demo.Circle">
         <constructor-arg name="radius" value="5" type="int"/>
     </bean>
 
-    <bean id="musicbox" class="com.springlearn.demo.MusicBox">
+    <bean id="musicbox" class="externals.demo.MusicBox">
         <property name="songs">
             <list>
-                <bean class="com.springlearn.demo.disc.BlankDisc"
+                <bean class="externals.demo.disc.BlankDisc"
                       p:title="九九八十一" p:artist="三无"/>
-                <bean class="com.springlearn.demo.disc.BlankDisc"
+                <bean class="externals.demo.disc.BlankDisc"
                       p:title="童话镇" p:artist="三无"/>
-                <bean class="com.springlearn.demo.disc.BlankDisc"
+                <bean class="externals.demo.disc.BlankDisc"
                       p:title="起风了" p:artist="买辣椒也用券"/>
             </list>
         </property>

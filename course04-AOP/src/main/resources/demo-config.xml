@@ -3,13 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="audience" class="demo.audience.Audience"/>
+    <bean id="audience" class="aop.demo.audience.Audience"/>
 
     <aop:config>
         <aop:aspect ref="audience">
             <aop:pointcut
                     id="performance"
-                    expression="execution(* demo.concert.NewYearConcert.perform(..))"/>
+                    expression="execution(* *.concert.NewYearConcert.perform(..))"/>
             <aop:before method="silenceCellPhone" pointcut-ref="performance" />
             <aop:before method="takeSeat" pointcut-ref="performance" />
             <aop:after-returning method="applause" pointcut-ref="performance" />
@@ -17,13 +17,13 @@
         </aop:aspect>
     </aop:config>
 
-    <bean id="highFan" class="demo.audience.HighFan" />
+    <bean id="highFan" class="aop.demo.audience.HighFan" />
 
     <aop:config>
         <aop:aspect ref="highFan">
             <aop:pointcut
                     id="performance"
-                    expression="execution(* demo.concert.HigherBrothersLiveHouse.perform(..))" />
+                    expression="execution(* *.concert.HigherBrothersLiveHouse.perform(..))" />
             <aop:around method="watchPerformance" pointcut-ref="performance" />
         </aop:aspect>
     </aop:config>

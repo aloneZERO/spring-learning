@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="compactDisc"
-          class="com.springlearn.soundsystem.album.Sad"/>
-    <bean id="cdPlayer" class="com.springlearn.soundsystem.CDPlayer">
-        <constructor-arg ref="compactDisc"/>
-    </bean>
+          class="xmlcfg.soundsystem.album.Sad"/>
+    <bean id="cdPlayer" class="xmlcfg.soundsystem.player.CDPlayer"
+          c:cd-ref="compactDisc"/>
 
-    <bean id="blankDisc"
-          class="com.springlearn.soundsystem.album.BlankDisc">
+    <bean id="blankDisc" class="xmlcfg.soundsystem.album.BlankDisc">
         <constructor-arg name="title" value="改革春风吹满地"/>
         <constructor-arg name="artist" value="本山大叔"/>
     </bean>
 
     <bean id="blankDisc2"
-          class="com.springlearn.soundsystem.album.BlankDisc"
+          class="xmlcfg.soundsystem.album.BlankDisc"
           c:title="普通DISCO"
           c:artist="佚名"/>
 
-    <bean id="blankDisc3" class="com.springlearn.soundsystem.album.BlankDisc">
+    <bean id="blankDisc3" class="xmlcfg.soundsystem.album.BlankDisc">
         <constructor-arg name="title" value="大合集"/>
         <constructor-arg name="artist" value="Giao哥"/>
         <constructor-arg>
@@ -32,10 +31,10 @@
         </constructor-arg>
     </bean>
 
-    <bean id="blankDisc4" class="com.springlearn.soundsystem.album.BlankDisc"
+    <bean id="blankDisc4" class="xmlcfg.soundsystem.album.BlankDisc"
           p:title="大合集"
           p:artist="圣主高飞">
-        <!--依赖于对象的 Setter 方法-->
+        <!-- 依赖于对象的 Setter 方法 -->
         <property name="tracks">
             <list value-type="java.lang.String">
                 <value>想你想你想你</value>

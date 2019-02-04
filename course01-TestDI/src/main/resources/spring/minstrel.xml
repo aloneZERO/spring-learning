@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="knight" class="testdi.knight.BraveKnight">
+        <constructor-arg ref="quest"/>
+    </bean>
+
+    <bean id="quest" class="testdi.quest.SlayDragonQuest">
+        <constructor-arg ref="fakePrintStream"/>
+    </bean>
+
+    <bean id="minstrel" class="testdi.Minstrel">
+        <constructor-arg ref="fakePrintStream"/>
+    </bean>
+
+    <bean id="fakePrintStream" class="testdi.io.FakePrintStream"/>
+
+    <!--
+        表达式"* *.embarkOnQuest(..)"的匹配结果是：
+        任意返回值、任意类（包含包名）、任意参数列表的 embarkOnQuest 方法。
+        只要 embarkOnQuest 方法被调用，
+        调用前执行 Minstrel 的 singBeforeQuest 方法；
+        调用后执行 Minstrel 的 singAfterQuest 方法
+     -->
+    <aop:config>
+        <aop:aspect ref="minstrel">
+            <aop:pointcut id="embark"
+                          expression="execution(* *.embarkOnQuest(..))"/>
+            <aop:before pointcut-ref="embark"
+                        method="singBeforeQuest"/>
+            <aop:after pointcut-ref="embark"
+                       method="singAfterQuest"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
