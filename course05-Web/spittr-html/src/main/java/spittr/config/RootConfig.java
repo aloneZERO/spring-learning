@@ -17,5 +17,4 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
                     value = EnableWebMvc.class)
         })
 public class RootConfig {
-
 }

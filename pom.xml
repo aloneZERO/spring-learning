@@ -25,6 +25,7 @@
         <module>course17-Message</module>
         <module>course18-WebSocket</module>
         <module>course19-Mail</module>
+        <module>course21-SpringBoot</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -278,8 +279,9 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-neo4j</artifactId>
-                <version>${spring.data.version}</version>
+                <version>4.2.20.RELEASE</version>
             </dependency>
+
             <!-- H2 Database -->
             <dependency>
                 <groupId>com.h2database</groupId>
